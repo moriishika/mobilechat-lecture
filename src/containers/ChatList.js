@@ -11,15 +11,14 @@ class ChatList extends Component {
   }
 
   render(){
+    console.log('arrray kosong',this.props.chats);
       return(
         <View style={styles.container}>
-          <FlatList
-          data={this.props.chats}
-          renderItem={({item}) => <ChatItem
-          key={item.id.toString()}
-          chat={{...item}}
-          />}
-          />
+        <FlatList
+        data={this.props.chats}
+        renderItem={({ item }) => <ChatItem name={item.name} message={item.message} sent={item.sent} id={item.id} />}
+        keyExtractor={item => item.id.toString()}
+      />
         </View>
       )
     }

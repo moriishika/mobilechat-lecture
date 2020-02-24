@@ -4,15 +4,15 @@ import {Button, StyleSheet, Text, View} from 'react-native';
 function ChatItem(props) {
   return <View style={styles.item}>
   <Text style={styles.authorHeader}>
-  {props.chat.name} - {props.chat.message}
-  <Button onPress={props.chat.sent ? props.onDelete : props.resend} title={props.chat.sent ? 'x' : 'resend'} />
+  {props.name + ': ' + props.message}
   </Text>
-  {!props.chat.sent &&
+  {!props.sent &&
         <Text style={styles.networkError}>
           network failed, please check your connections
         </Text>
       }
-  </View>;
+      <Button onPress={props.sent ? props.onDelete : props.resend} title={props.sent ? 'x' : 'resend'} />
+  </View>
 }
 
 const styles = StyleSheet.create({
@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
   },
   authorHeader: {
     color: "green",
-    fontSize: 12
+    fontSize: 17
   },
   message: {
     fontSize: 10
   },
   item: {
     padding: 10,
-    height: 44,
+    height: 70,
   }
 });
 
-export default Item;
+export default ChatItem;

@@ -11,6 +11,7 @@ const loadChatFailure = () => ({
 })
 
 export const loadChat = () => {
+  console.log('mulai load data');
   return dispatch => {
     return fetch(`${API_URL}chats`)
     .then((response) => response.json())
@@ -18,7 +19,6 @@ export const loadChat = () => {
       dispatch(loadChatSuccess(responseJson))
     })
     .catch(function (error) {
-      console.error(error);
       dispatch(loadChatFailure())
     });
   }
@@ -57,7 +57,7 @@ export const postChat = (name, message) => {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      dispatch(postChatSuccess(response.data))
+      dispatch(postChatSuccess(responseJson))
     })
     .catch(function (error) {
       console.error(error);
@@ -96,7 +96,8 @@ export const deleteChat = (id) => {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      dispatch(deleteChatSuccess(response.data))
+      console.log(responseJson);
+      dispatch(deleteChatSuccess(responseJson))
     })
     .catch(function (error) {
       console.error(error);
@@ -109,9 +110,17 @@ export const deleteChat = (id) => {
 
 export const resendChat = (id, name, message) => {
   return dispatch => {
-    return request.post('chats', {id, name, message})
-    .then(function (response) {
-      dispatch(postChatSuccess(response.data))
+    return fetch(`${API_URL}chats`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id, name, message})
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      dispatch(postChatSuccess(responseJson))
     })
     .catch(function (error) {
       console.error(error);

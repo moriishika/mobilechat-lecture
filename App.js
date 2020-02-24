@@ -1,14 +1,7 @@
-/**
-* Sample React Native App
-* https://github.com/facebook/react-native
-*
-* @format
-* @flow
-*/
-
 import React, {Component} from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import 'react-native-gesture-handler';
 
 import ChatBox from './src/components/ChatBox';
 import ChatForm from './src/containers/ChatForm';
